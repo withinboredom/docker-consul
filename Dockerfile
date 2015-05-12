@@ -1,6 +1,6 @@
 # DOCKER-VERSION 1.0.0
 
-FROM smebberson/ubuntu-base
+FROM withinboredom/ubuntu-base
 MAINTAINER Scott Mebberson <scott@scottmebberson.com>
 
 # Install Unzip
@@ -11,6 +11,8 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     rm -rf /var/lib/apt/lists/*
 
 ENV CONSUL_VERSION 0.5.0
+ENV DATACENTER "local"
+ENV MASTER ""
 
 # Download and install Consul
 RUN curl -sSLO https://dl.bintray.com/mitchellh/consul/${CONSUL_VERSION}_linux_amd64.zip && \
@@ -23,9 +25,8 @@ RUN curl -sSLO https://dl.bintray.com/mitchellh/consul/${CONSUL_VERSION}_linux_a
     mkdir -p /data && \
     chown -R consul:consul /data
 
-# Add the files
-ADD root /
-
 VOLUME ["/data"]
+
+ADD root /
 
 EXPOSE 8300 8301 8301/udp 8302 8302/udp 8400 53 53/udp
