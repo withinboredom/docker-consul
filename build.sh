@@ -1,2 +1,2 @@
-docker build -t withinboredom/consul /vagrant/consul
+docker build -t withinboredom/consul consul
 #docker push withinboredom/consul
